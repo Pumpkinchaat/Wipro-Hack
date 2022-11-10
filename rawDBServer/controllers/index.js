@@ -4,15 +4,9 @@ const catchAsync = require("../utils/catchAsync");
 
 // this will be used by the sensors to send data to the Raw DB
 module.exports.postSensorData = catchAsync(async (req, res, next) => {
-  console.log(req.body , "lala");
-  let { data } = req.body;
-  data = data.split(" ");
-
-  const temperature = data[0];
-  const humidity = data[1];
-  const gasConcentration = data[2];
-  const timeStamp = data[3];
-  const SensorID = data[4];
+  const { temperature, humidity, gasConcentration, timeStamp, SensorID } =
+    req.query;
+    // !query also possible 
 
   const newReading = new Reading({
     temperature,
